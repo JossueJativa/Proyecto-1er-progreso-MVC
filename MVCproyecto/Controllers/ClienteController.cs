@@ -29,39 +29,46 @@ namespace MVCproyecto.Controllers
         [HttpPost]
         public IActionResult Create(Cliente cliente)
         {
+            _api.CrearCliente(cliente);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details (int id)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente;
 
+            //obtener cliente de la api
+            cliente = _api.GetCliente(id);
             return View(cliente);
         }
 
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente;
+            cliente = _api.GetCliente(id);
             return View(cliente);
         }
 
         [HttpPost]
         public IActionResult Edit(Cliente cliente)
         {
+            _api.ActualizarCliente(cliente);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Cliente cliente = new Cliente();
+            Cliente cliente;
+            cliente = _api.GetCliente(id);
             return View(cliente);
         }
 
         [HttpPost]
         public IActionResult Delete(Cliente cliente)
         {
+            _api.EliminarCliente(cliente.Id);
             return RedirectToAction("Index");
         }
     }

@@ -29,12 +29,15 @@ namespace MVCproyecto.Controllers
         [HttpPost]
         public IActionResult Create(Producto producto)
         {
+            _api.CrearProducto(producto);
             return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
         {
-            Producto producto = new Producto();
+            Producto producto;
+            //obtener el producto de la api
+            producto = _api.GetProducto(id);
 
             return View(producto);
         }
@@ -42,26 +45,30 @@ namespace MVCproyecto.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            Producto producto = new Producto();
+            Producto producto;
+            producto = _api.GetProducto(id);
             return View(producto);
         }
 
         [HttpPost]
         public IActionResult Edit(Producto producto)
         {
+            _api.ActualizarProducto(producto);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Producto producto = new Producto();
+            Producto producto;
+            producto = _api.GetProducto(id);
             return View(producto);
         }
 
         [HttpPost]
         public IActionResult Delete(Producto producto)
         {
+            _api.EliminarProducto(producto.Id);
             return RedirectToAction("Index");
         }
     }
